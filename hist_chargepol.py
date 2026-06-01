@@ -30,7 +30,7 @@ plt.hist(df_neg['zmin'], bins=20, alpha=0.6, color='blue', label='Carga Negativa
 # Configurações de exibição do gráfico
 plt.xlabel('Altitude Base da Camada - zmin (km)', fontsize=12)
 plt.ylabel('Frequência (Número de Ocorrências)', fontsize=12)
-plt.title('Distribuição Vertical das Camadas de Carga', fontsize=14)
+plt.title('Distribuição Vertical das Camadas de Carga - K-means approach', fontsize=14)
 plt.legend()
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
