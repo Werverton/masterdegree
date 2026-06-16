@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Caminho do arquivo CSV gerado pelo chargepol
-csv_file = r"C:\Users\werve\Downloads\chargepol\chargepol.csv"
+csv_file = r"C:\Users\werve\Downloads\chargepol\chargepol235000_0600.csv"
 
 # Ler o CSV, informando que linhas iniciadas com '#' são comentários
 df = pd.read_csv(csv_file, comment='#')

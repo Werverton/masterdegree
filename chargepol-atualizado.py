@@ -40,9 +40,9 @@ from sklearn.preprocessing import StandardScaler
 
 #direct = "C:\\Users\\werve\\Downloads\\RELAMP_LMA_20190419_level3\\RELAMP_LMA_20190419_235001_600_total_energy_3d.nc.gz"
 
-direct = "C:\\Users\\werve\\Downloads\\xlma-python-master\\xlma-python-master\\examples\\test_output\\LL_20240720_235000_0600_map500m.nc"
+direct = "C:\\Users\\werve\\Downloads\\xlma-python-master\\xlma-python-master\\examples\\test_output\\234000\\"
 # file path for output
-filename_output = 'chargepol.csv'
+filename_output = 'chargepol234000_0600.csv'
 
 # LMA network center (lat, lon):
 netw_center = np.array([-31.7,-64.1]) 
@@ -119,7 +119,7 @@ def read_lma(file, date_start, max_range, nsou):
     # Recover seconds since 0 UTC from datetime64 objects
     lma_pw = data.event_power.data
     if date_start is None:
-        date_start = dt.utcfromtimestamp(data.event_time.data[0].item()/1e9).replace(hour=0, minute=0, second=0, microsecond=0, tzinfo=timezone.utc).timestamp()
+        date_start = dt.fromtimestamp(data.event_time.data[0].item()/1e9, timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0).timestamp()
     lma_t = (data.event_time.data.astype(float)/1e9 - date_start).astype(float)
     # Extract flash IDs from the sources and the flashes
     lma_flid = data.event_parent_flash_id.data
@@ -352,7 +352,7 @@ for i in range(0,len(filenames)):
             time_diffs = flash_df['time'].diff().fillna(0).values
             with np.errstate(divide='ignore', invalid='ignore'):
                 flash_df['velocity'] = np.where(time_diffs > 1e-9, distances / time_diffs, 0.0)
-            flash_df['velocity'].fillna(0, inplace=True)
+            flash_df['velocity'] = flash_df['velocity'].fillna(0)
 
             # 3. Scale features and apply K-Means
             features = flash_df[['alt', 'pw', 'velocity']]
